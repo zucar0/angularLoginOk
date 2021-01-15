@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { AdminComponent } from './admin/admin.component';
+import { AuthGuard } from './auth.guard';
+import { AuthComponent } from './auth/auth.component';
+
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/auth'},
+  { path: 'auth', component: AuthComponent}, 
+  { path: 'admin', component: AdminComponent, canActivate:[AuthGuard]},
+  { path: '**', redirectTo:'/auth'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
